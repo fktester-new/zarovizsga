@@ -36,7 +36,7 @@ public class KennelTest {
         assertEquals(4, kennel.getDogs().get(1).getHappiness());
     }
 
-    /*@Test
+    @Test
     void testFindByName() {
         Dog dog = kennel.findByName("Morzsi");
         assertTrue(dog instanceof Husky);
@@ -55,7 +55,7 @@ public class KennelTest {
         assertEquals(12, kennel.findByName("Morzsi").getHappiness());
     }
 
-    @Test
+    /*@Test
     void testHappyDogNames() {
         kennel.playWith("Morzsi", 4);
         kennel.playWith("Bigli", 4);
