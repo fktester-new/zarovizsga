@@ -55,12 +55,12 @@ public class KennelTest {
         assertEquals(12, kennel.findByName("Morzsi").getHappiness());
     }
 
-    /*@Test
+    @Test
     void testHappyDogNames() {
         kennel.playWith("Morzsi", 4);
         kennel.playWith("Bigli", 4);
         kennel.playWith("Zokni", 2);
 
         assertEquals(List.of("Bigli", "Morzsi"), kennel.getHappyDogNames(7));
-    } */
+    }
 }

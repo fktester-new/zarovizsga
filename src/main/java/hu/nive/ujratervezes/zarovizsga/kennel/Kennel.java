@@ -38,4 +38,14 @@ public class Kennel {
         Dog lucky = findByName(name);
         lucky.play(hours);
     }
+
+    public List<String> getHappyDogNames(int minHappiness){
+        List<String> result = new ArrayList<>();
+        for (Dog dog : dogs) {
+            if(dog.getHappiness() > minHappiness){
+                result.add(dog.getName());
+            }
+        }
+        return result;
+    }
 }
