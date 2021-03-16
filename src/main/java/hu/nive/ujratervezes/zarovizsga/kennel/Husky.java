@@ -1,4 +1,21 @@
 package hu.nive.ujratervezes.zarovizsga.kennel;
 
-public class Husky {
+public class Husky extends Dog {
+
+
+    private String name;
+
+    public Husky(String name) {
+        super(name);
+    }
+
+    @Override
+    void feed() {
+        happiness += 4;
+    }
+
+    @Override
+    void play(int hours) {
+        happiness += 3* hours;
+    }
 }
