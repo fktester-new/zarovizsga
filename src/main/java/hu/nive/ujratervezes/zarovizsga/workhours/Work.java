@@ -2,7 +2,7 @@ package hu.nive.ujratervezes.zarovizsga.workhours;
 
 import java.time.LocalDate;
 
-public class Work implements Comparable<Work>{
+public class Work {
 
     private String name;
     private int workHours;
@@ -26,10 +26,6 @@ public class Work implements Comparable<Work>{
         return workDate;
     }
 
-    @Override
-    public int compareTo(Work o) {
-        return workHours - o.workHours;
-    }
 
     @Override
     public String toString() {

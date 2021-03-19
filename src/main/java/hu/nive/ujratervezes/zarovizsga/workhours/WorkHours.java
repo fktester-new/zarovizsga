@@ -6,7 +6,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class WorkHours {
@@ -19,16 +18,30 @@ public class WorkHours {
                 Work work = parseLine(line);
                 result.add(work);
             }
-            Collections.sort(result);
-            return Collections.min(result).toString();
-        } catch(IOException ioe){
+            return findMinHour(result).toString();
+        } catch (IOException ioe) {
             throw new IllegalStateException("Cannot read file!", ioe);
         }
     }
 
-    private Work parseLine(String line){
+    private Work parseLine(String line) {
         String[] temp = line.split(",");
-        Work work = new Work(temp[0],Integer.parseInt(temp[1]), LocalDate.parse(temp[2]));
-        return work;
+        return new Work(temp[0], Integer.parseInt(temp[1]), LocalDate.parse(temp[2]));
+
+    }
+
+    private Work findMinHour(List<Work> works) {
+        if (works == null){
+            throw new IllegalArgumentException("There is no work to evaluate!");
+        }
+        int minHour = 25;
+        Work minWork = null;
+        for (Work work : works) {
+            if (work.getWorkHours() < minHour) {
+                minHour = work.getWorkHours();
+                minWork = work;
+            }
+        }
+        return minWork;
     }
 }
