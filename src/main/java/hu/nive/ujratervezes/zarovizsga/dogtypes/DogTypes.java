@@ -22,7 +22,7 @@ public class DogTypes {
         try (
                 Connection conn = dataSource.getConnection();
                 PreparedStatement stmt =
-                        conn.prepareStatement("select name from dog_types where country = ?");
+                        conn.prepareStatement("select name from dog_types where country = ?")
 
         ) {
             stmt.setString(1, country.toUpperCase(Locale.ROOT));
@@ -38,7 +38,7 @@ public class DogTypes {
     private List<String> parseResult(PreparedStatement stmt) {
         List<String> result = new ArrayList<>();
         try (
-                ResultSet rs = stmt.executeQuery();
+                ResultSet rs = stmt.executeQuery()
         ) {
             while (rs.next()) {
                 String name = rs.getString("name").toLowerCase();
@@ -48,6 +48,32 @@ public class DogTypes {
         } catch (SQLException sqle) {
             throw new IllegalArgumentException("Error by query", sqle);
         }
+    }
 
+    public List<String> getDogsByCountryOrdered(String country){
+        try (
+                Connection conn = dataSource.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(" SELECT lower(name) As name FROM dog_types WHERE lower(country) = lower(?) ORDER BY NAME")
+                ) {
+            stmt.setString(1, country);
+            return parseOrderedResult(stmt);
+        } catch (SQLException sqle) {
+            throw new IllegalStateException("Query failed!", sqle);
+        }
+    }
+
+    private List<String> parseOrderedResult(PreparedStatement stmt){
+        List<String> result = new ArrayList<>();
+        try(
+                ResultSet rs = stmt.executeQuery()
+                ){
+            while(rs.next()){
+                String name = rs.getString("name");
+                result.add(name);
+            }
+            return result;
+        } catch (SQLException sqle){
+            throw new IllegalArgumentException("Error by query!", sqle);
+        }
     }
 }
