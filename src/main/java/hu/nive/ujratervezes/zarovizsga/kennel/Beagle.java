@@ -2,8 +2,6 @@ package hu.nive.ujratervezes.zarovizsga.kennel;
 
 public class Beagle extends Dog {
 
-    private String name;
-
 
     public Beagle(String name) {
         super(name);
@@ -11,11 +9,12 @@ public class Beagle extends Dog {
 
     @Override
     void feed() {
-        happiness += 2;
+        increaseHappiness(2);
     }
 
     @Override
     void play(int hours) {
-        happiness += 2 * hours;
+
+        increaseHappiness(2 * hours);
     }
 }

@@ -22,17 +22,14 @@ public class Kennel {
     }
 
     public Dog findByName(String name){
-        Dog result = null;
         for (Dog dog : dogs) {
             if (dog.getName().equals(name)){
-                result = dog;
+                return dog;
             }
         }
-        if (result == null){
-            throw new IllegalArgumentException("There is no dog with this name!");
+        throw new IllegalArgumentException("There is no dog with this name!");
         }
-        return result;
-    }
+
 
     public void playWith(String name, int hours){
         Dog lucky = findByName(name);

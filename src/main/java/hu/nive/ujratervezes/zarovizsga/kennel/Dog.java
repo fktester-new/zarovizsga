@@ -7,7 +7,6 @@ public abstract class Dog {
 
     public Dog(String name) {
         this.name = name;
-        happiness = 0;
     }
 
     public String getName() {
@@ -21,4 +20,8 @@ public abstract class Dog {
     abstract void feed();
 
     abstract void play(int hours);
+
+    protected void increaseHappiness(int diff){
+        happiness += diff;
+    }
 }
