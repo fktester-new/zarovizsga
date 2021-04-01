@@ -6,6 +6,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class WorkHours {
@@ -18,7 +20,8 @@ public class WorkHours {
                 Work work = parseLine(line);
                 result.add(work);
             }
-            return findMinHour(result).toString();
+            //return findMinHour(result).toString();
+            return findMinHourByComparator(result).toString();
         } catch (IOException ioe) {
             throw new IllegalStateException("Cannot read file!", ioe);
         }
@@ -31,7 +34,7 @@ public class WorkHours {
     }
 
     private Work findMinHour(List<Work> works) {
-        if (works == null){
+        if (works == null) {
             throw new IllegalArgumentException("There is no work to evaluate!");
         }
         int minHour = 25;
@@ -43,5 +46,19 @@ public class WorkHours {
             }
         }
         return minWork;
+    }
+
+    private Work findMinHourByComparator(List<Work> works) {
+        if (works == null) {
+            throw new IllegalArgumentException("There is no work to evaluate!");
+        }
+        return Collections.min(works, new Comparator<Work>() {
+                    @Override
+                    public int compare(Work o1, Work o2) {
+                        return o1.getWorkHours() - o2.getWorkHours();
+                    }
+                }
+
+        );
     }
 }
